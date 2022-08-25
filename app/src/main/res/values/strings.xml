@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">lista-compra</string>
+    <string name="nome">Nome</string>
+    <string name="marca">Marca</string>
+    <string name="quantidade">Quantidade</string>
+    <string name="salvar">Salvar</string>
+</resources>
