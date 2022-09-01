@@ -1,9 +1,18 @@
 package br.unigran.lista_compra;
 
 public class Produto {
+    private Integer id;
     private String nome;
     private String marca;
     private Integer quantidade;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getNome() {
         return nome;
