@@ -28,7 +28,14 @@ public class ProdutoDB {
         conexao.close();
     }
 
-    public void atualizar() {
+    public void atualizar(Produto produto) {
+        conexao = db.getWritableDatabase();
+        ContentValues valores = new ContentValues();
+        valores.put("nome", produto.getNome());
+        valores.put("marca", produto.getMarca());
+        valores.put("quantidade", produto.getQuantidade());
+        conexao.update("produto", valores, "id = ?", new String[]{produto.getId().toString()});
+        conexao.close();
     }
 
     public void remover(Integer id) {

@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     EditText marca;
     EditText quantidade;
 
+    Integer atualizando;
+
     List<Produto> dados;
 
     ListView listagem;
@@ -56,27 +58,52 @@ public class MainActivity extends AppCompatActivity {
 
         listagem.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                AlertDialog.Builder alert = new AlertDialog.Builder(getApplicationContext());
-                alert.setMessage("Confirmar");
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int j, long l) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(view.getContext());
+                alert.setMessage("Realmente quer remover?");
                 alert.setPositiveButton("remover", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        produtoDB.remover(dados.get(j).getId());
+                        produtoDB.listar(dados);
+                    }
+                });
+                alert.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
                     }
                 });
+                alert.create().show();
                 return false;
+            }
+        });
+        listagem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                atualizando = dados.get(i).getId();
+                nome.setText(dados.get(i).getNome());
+                marca.setText(dados.get(i).getMarca());
+                quantidade.setText(dados.get(i).getQuantidade().toString());
             }
         });
     }
 
     public void salvar(View view) {
         Produto produto = new Produto();
+        if (atualizando != null) {
+            produto.setId(atualizando);
+        }
         produto.setMarca(marca.getText().toString());
         produto.setNome(nome.getText().toString());
         produto.setQuantidade(Integer.parseInt(quantidade.getText().toString()));
 
-        produtoDB.inserir(produto);
+        if (atualizando != null) {
+            produtoDB.atualizar(produto);
+        } else {
+            produtoDB.inserir(produto);
+        }
+        atualizando = null;
         produtoDB.listar(dados);
 
         Toast.makeText(this, "Produto salvo com sucesso.", Toast.LENGTH_SHORT).show();
