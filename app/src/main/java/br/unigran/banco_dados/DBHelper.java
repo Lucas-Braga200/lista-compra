@@ -12,7 +12,7 @@ import br.unigran.lista_compra.Produto;
 public class DBHelper extends SQLiteOpenHelper {
 
     public DBHelper(@Nullable Context context) {
-        super(context, "BancoListaCompra", null, 2);
+        super(context, "BancoListaCompra", null, 5);
     }
 
     @Override

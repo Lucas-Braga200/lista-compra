@@ -58,10 +58,25 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="5dp"
-        android:text="@string/salvar"
         android:onClick="salvar"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/salvar"
+        app:layout_constraintEnd_toStartOf="@+id/cancelar"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/quantidade" />
+
+    <Button
+        android:id="@+id/cancelar"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:backgroundTint="@color/red_600"
+        android:onClick="cancelarAtualizacao"
+        android:text="@string/cancelar"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/salvar"
         app:layout_constraintTop_toBottomOf="@+id/quantidade" />
 
     <ListView
