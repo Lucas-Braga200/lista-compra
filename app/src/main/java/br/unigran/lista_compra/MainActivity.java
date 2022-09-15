@@ -59,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
 
         db = new DBHelper(this);
         produtoDB = new ProdutoDB(db);
-        produtoDB.arrumar();
 
         produtoDB.listar(dados);
 

@@ -59,8 +59,4 @@ public class ProdutoDB {
         }
         conexao.close();
     }
-
-    public void arrumar() {
-        conexao.delete("produto", null, null);
-    }
 }
