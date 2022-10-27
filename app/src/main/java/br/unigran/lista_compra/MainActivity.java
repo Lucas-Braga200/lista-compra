@@ -2,6 +2,8 @@ package br.unigran.lista_compra;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
@@ -18,6 +20,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.unigran.adapter.ProdutoAdapter;
 import br.unigran.banco_dados.DBHelper;
 import br.unigran.banco_dados.ProdutoDB;
 
@@ -39,10 +42,16 @@ public class MainActivity extends AppCompatActivity {
 
     ProdutoDB produtoDB;
 
+    RecyclerView recyclerView;
+    LinearLayoutManager linearLayoutManager;
+    ProdutoAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        linearLayoutManager = new LinearLayoutManager(this);
 
         nome = findViewById(R.id.nome);
         marca = findViewById(R.id.marca);
@@ -52,18 +61,24 @@ public class MainActivity extends AppCompatActivity {
 
         dados = new ArrayList();
 
-        listagem = findViewById(R.id.lista);
+        // listagem = findViewById(R.id.lista);
 
-        ArrayAdapter adapter = new ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, dados);
-        listagem.setAdapter(adapter);
+        // ArrayAdapter adapter = new ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, dados);
+        // listagem.setAdapter(adapter);
 
         db = new DBHelper(this);
         produtoDB = new ProdutoDB(db);
-
         produtoDB.listar(dados);
+
+        adapter = new ProdutoAdapter(dados);
+
+        recyclerView = findViewById(R.id.idRecycler);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(adapter);
 
         toggleEstadoAtualizacao(null);
 
+        /*
         listagem.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int j, long l) {
@@ -95,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
                 quantidade.setText(dados.get(i).getQuantidade().toString());
             }
         });
+         */
     }
 
     public void toggleEstadoAtualizacao(Integer id) {

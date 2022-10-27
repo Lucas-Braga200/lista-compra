@@ -79,8 +79,8 @@
         app:layout_constraintStart_toEndOf="@+id/salvar"
         app:layout_constraintTop_toBottomOf="@+id/quantidade" />
 
-    <ListView
-        android:id="@+id/lista"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/idRecycler"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="5dp"

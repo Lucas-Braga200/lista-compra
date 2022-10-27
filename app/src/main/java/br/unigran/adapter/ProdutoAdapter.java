@@ -3,9 +3,13 @@ package br.unigran.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -29,17 +33,24 @@ public class ProdutoAdapter extends RecyclerView.Adapter<ProdutoAdapter.ProdutoH
 
     @Override
     public void onBindViewHolder(@NonNull ProdutoHolder holder, int position) {
-
+        holder.titulo.setText(dados.get(position).getNome());
+        holder.subtitulo.setText(dados.get(position).getMarca());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return dados.size();
     }
 
     public class ProdutoHolder extends RecyclerView.ViewHolder {
+        public TextView titulo;
+        public TextView subtitulo;
+        public Button editar;
         public ProdutoHolder(@NonNull View itemView) {
             super(itemView);
+            titulo = itemView.findViewById(R.id.idProduto);
+            subtitulo = itemView.findViewById(R.id.idMarca);
+            editar = itemView.findViewById(R.id.idEditar);
         }
     }
 }
